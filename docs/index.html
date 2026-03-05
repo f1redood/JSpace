@@ -79,11 +79,12 @@
     </div>
     
     <div class="container">
-      <div class="code" id="code"></div>
+      <div class="code" id="code" oninput="var start = this.selectionStart; this.value = highlightSyntax(this.value); this.selectionStart = start;"></div>
       <div class="v-container">
       	<canvas id="canvas"></canvas>
       	<div class="console" id="console"></div>
       </div>
     </div>
   </body>
+  <script src="https://f1redood.github.io/JSpace/syntaxHighlighter.js"></script>
 </html>
