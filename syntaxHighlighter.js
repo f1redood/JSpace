@@ -18,7 +18,7 @@ var map = {
 
 function highlightSyntax(text) {
   var res = "";
-  for (var word of text) {
+  for (var word of text.split(" ")) {
     if (word in map) {
       res += `<span style="color:${map[word]};">${word}</span>;`
     } else {
