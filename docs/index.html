@@ -63,6 +63,7 @@
         border:1px solid #555;
         padding:10px;
         border-radius:10px;
+        overflow:scroll;
       }
       
       canvas {
@@ -75,16 +76,37 @@
   </head>
   <body>
   	<div class="bar">
-      <button><i class="material-icons">play_arrow</i></button>
+      <button onclick="run();"><i class="material-icons">play_arrow</i></button>
     </div>
     
     <div class="container">
-      <div class="code" id="code" oninput="var start = this.selectionStart; this.value = highlightSyntax(this.value); this.selectionStart = start;"></div>
+      <div class="code" id="code" contenteditable="true"></div>
       <div class="v-container">
       	<canvas id="canvas"></canvas>
       	<div class="console" id="console"></div>
       </div>
     </div>
   </body>
-  <script src="https://f1redood.github.io/JSpace/syntaxHighlighter.js"></script>
+  <script src="https://f1redood.github.io/JSpace/syntaxHighlighter.js?v=2"></script>
+  <script>
+  	var code = document.getElementById("code");
+    var cnsl = document.getElementById("console");
+    
+    /*** SETUP ***/
+    window.canvas = document.getElementById("canvas");
+    console.log = function(e) { cnsl.textContent += e; };
+    console.error = function(e) { cnsl.innerHTML += `<span style="color:#f55;">${e}</span>`; };
+    
+    function run() {
+      cnsl.textContent = "";
+      canvas.width = canvas.width;
+      new Function(code.innerText)();
+    }
+    
+    /*code.oninput = function() {
+      alert(this.value);
+      this.innerHTML = highlightSyntax(this.value);
+    };*/
+    
+  </script>
 </html>
