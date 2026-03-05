@@ -1,0 +1,106 @@
+<script>
+  var win = window.open();
+  win.innerHTML = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSpace</title>
+    <link rel="icon" href="https://f1redood.github.io/JSpace/docs/J.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+      body {
+        background:#222;
+        color:#fff;
+        font-family:monospace;
+      }
+      
+      .bar {
+      	background:#333;
+        border:1px solid #555;
+        border-radius:10px;
+        width:calc(100% - 22px);
+        height:20px;
+        padding:10px;
+        margin-bottom:10px;
+      }
+      
+      .bar button {
+      	width:20px;
+        height:20px;
+        background:#333;
+        border:none;
+        border-radius:5px;
+        display:inline-flex;
+        justify-content:center;
+        align-items:center;
+      }
+      
+      .bar button:hover {
+      	background:#555;
+      }
+      
+      .bar button .material-icons {
+      	font-size:20px;
+        color:#fff;
+      }
+
+      .container {
+        display:flex;
+        flex-direction:row;
+        gap:10px;
+        width:100%;
+        height:calc(100vh - 68px);
+      }
+      
+      .v-container {
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        width:50%;
+        height:calc(100vh - 68px);
+      }
+
+      .code, .console {
+        flex:1;
+        background:#333;
+        border:1px solid #555;
+        padding:10px;
+        border-radius:10px;
+        overflow:scroll;
+      }
+      
+      canvas {
+      	flex-grow:0;
+        flex-shrink:1;
+        background:#000;
+        aspect-ratio:2/1;
+      }
+    </style>
+  </head>
+  <body>
+  	<div class="bar">
+      <button onclick="run();"><i class="material-icons">play_arrow</i></button>
+    </div>
+    
+    <div class="container">
+      <div class="code" id="code" contenteditable="true"></div>
+      <div class="v-container">
+      	<canvas id="canvas"></canvas>
+      	<div class="console" id="console"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+  	var code = document.getElementById("code");
+    var cnsl = document.getElementById("console");
+    
+    /*** SETUP ***/
+    window.canvas = document.getElementById("canvas");
+    console.log = function(e) { cnsl.textContent += e; };
+    console.error = function(e) { cnsl.innerHTML += \`<span style="color:#f55;">${e}</span>\`; };
+    
+    function run() {
+      cnsl.textContent = "";
+      canvas.width = canvas.width;
+      new Function(code.innerText)();
+    }</script></html>`;
+</script>
